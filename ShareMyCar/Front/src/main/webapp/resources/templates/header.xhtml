@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+<head>
+<title>IGNORED</title>
+</head>
+<body>
+	<ui:composition>
+		<!-- Header -->
+
+		<h:form>
+			<p:tabMenu activeIndex="#{param.i}" style="unline">
+
+				<p:menuitem value="Home" action="#{navigationBean.fwIndex}"
+					icon="fa fa-home fa-fw">
+					<f:param name="i" value="0" />
+				</p:menuitem>
+
+				<p:menuitem value="mon compte"
+					action="#{navigationBean.fwAccueilClient}"
+					rendered="#{userConnexionBean.user.getClass().getSimpleName() eq 'Client'}"
+					icon="fa fa-user fa-fw">
+					<f:param name="i" value="1" />
+				</p:menuitem>
+
+				<p:menuitem value="tableau de bord"
+					rendered="#{userConnexionBean.user.getClass().getSimpleName() eq 'Admin'}"
+					icon="fa fa-bar-chart fa-fw">
+					<f:param name="i" value="2" />
+				</p:menuitem>
+				<p:menuitem value="administration"
+				action="#{navigationBean.fwAccueilAdmin}"
+					rendered="#{userConnexionBean.user.getClass().getSimpleName() eq 'Admin'}"
+					icon="fa fa-cogs fa-fw">
+					<f:param name="i" value="6" />
+				</p:menuitem>
+
+				<p:menuitem value="inscription"
+					action="#{navigationBean.fwInscription}"
+					rendered="#{!userConnexionBean.logguer}" icon="fa fa-user-plus fa-fw">
+					<f:param name="i" value="3" />
+				</p:menuitem>
+				
+				<p:menuitem value="connexion"
+					action="#{navigationBean.fwConnexion}"
+					rendered="#{!userConnexionBean.logguer}" icon="fa fa-lock fa-fw">
+					<f:param name="i" value="4" />
+				</p:menuitem>
+				
+				<p:menuitem value="déconnexion"
+					action="#{userConnexionBean.doDeconnexion}"
+					rendered="#{userConnexionBean.logguer}" icon="fa fa-unlock fa-fw">
+					<f:param name="i" value="5" />
+				</p:menuitem>
+				
+			</p:tabMenu>
+
+		</h:form>
+
+
+	</ui:composition>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui" xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title><ui:insert name="title">Default title</ui:insert></title>
+	<h:outputStylesheet name="css/stylesheet.css" />
+	<f:loadBundle basename="com.sharemycar.bean.bundle.messages" var="msg"/>
+
+</h:head>
+
+<h:body>
+
+	<p:layout>
+
+		<p:layoutUnit position="north" size="400">
+			<ui:insert name="header">
+				<ui:include src="#{templatesNavigationBean.header}" />
+			</ui:insert>
+
+			<ui:insert name="recherche">
+				<ui:include src="#{templatesNavigationBean.recherche}" />
+			</ui:insert>
+
+			<ui:insert name="messages">
+				<ui:include src="#{templatesNavigationBean.messages}" />
+			</ui:insert>
+		</p:layoutUnit>
+
+		<p:layoutUnit position="south" size="200">
+			<ui:insert name="footer">
+				<ui:include src="#{templatesNavigationBean.footer}" />
+			</ui:insert>
+		</p:layoutUnit>
+
+		<p:layoutUnit position="center">
+			<ui:insert name="content">
+				<ui:include src="#{templatesNavigationBean.content}" />
+			</ui:insert>
+		</p:layoutUnit>
+
+
+	</p:layout>
+</h:body>
+
+</html>

@@ -1,0 +1,28 @@
+#content {
+	min-height:500px;
+	
+}
+#footer {
+	background:#dddddd 50.0% 50.0%;
+}
+
+.miniContaint {
+	border-width:1.0px;
+	border-style:solid;
+	border-color:black;
+	margin:2px 2px;
+	width:100%;
+}
+.miniContaint1 {
+	border-width:1.0px;
+	border-style:solid;
+	border-color:black;
+	margin:2px 2px;
+	padding:5px 5px;
+	overflow: hidden !important;
+}
+.ui-layout-unit .ui-layout-unit-content{
+	padding: 0.2em 0.0em;
+	border: 0.0px none;
+	overflow: hidden !important;
+}

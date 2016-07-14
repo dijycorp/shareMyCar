@@ -1,0 +1,26 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+
+<h:head>
+	<title>Administration du Site</title>
+</h:head>
+<h:body>
+	<ui:decorate template="#{templatesNavigationBean.navLeftTemplate}">
+
+		<ui:define name="navLeft">
+			<ui:include src="#{templatesNavigationBean.menuAdmin}"></ui:include>
+		</ui:define>
+		
+		
+		<ui:define name="content">
+quoi que je dises
+		</ui:define>
+
+	</ui:decorate>
+
+</h:body>
+</html>
+

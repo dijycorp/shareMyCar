@@ -1,0 +1,89 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+
+<h:head>
+	<title>Inscription sur votre site de partage de trajt</title>
+</h:head>
+<h:body>
+	<ui:decorate template="#{templatesNavigationBean.basicTemplate}">
+
+		<ui:define name="content">
+
+			<h:form id="formulaireInscription">
+				<b:container>
+					<h3>Demande d'inscription</h3>
+
+					<p:separator />
+					
+					<p:focus context="formulaireInscription" />
+
+					<h:panelGrid columns="2">
+
+
+						<h:outputText value="Login" />
+						<p:inputText id="loginCreate" value="#{clientBean.client.login}" required="true"
+							requiredMessage="Il faut choisir un pseudo" size="25">
+							<f:validator validatorId="loginValidator" />
+							<f:validateLength minimum="2"/>
+						</p:inputText>
+
+						<h:outputText value="Mot de passe" />
+						<p:password id="pwd1" value="#{clientBean.password}" match="pwd2"
+							required="true" size="25"
+							validatorMessage="Les mots de passe saisie ne sont pas identique"
+							requiredMessage="Le mot de passe est indispensable pour assurée la sécurité de votre compte" />
+
+						<h:outputText value="Confirmation" />
+						<p:password id="pwd2" value="#{clientBean.passwordConfirme}"
+							required="true" size="25"
+							requiredMessage="la confirmation du mot de passe n'a pas été saisie" />
+
+
+						<h:outputText value="Nom" />
+						<p:inputText value="#{clientBean.client.nom}" size="25"
+							required="true" requiredMessage="le nom n'est pas renseigné" />
+						<h:outputText value="Prénom" />
+
+						<p:inputText value="#{clientBean.client.prenom}" size="25"
+							required="true" requiredMessage="le prénom n'est pas renseigné" />
+
+						<h:outputText value="Email" />
+						<p:inputText value="#{clientBean.client.email}" required="true"
+							size="25"
+							requiredMessage="L'adresse mail est indispensable pour valider le compte et recevoir les notifications relatifs à vos trajets">
+							<f:validator validatorId="emailValidator" />
+						</p:inputText>
+
+						<h:outputText value="Téléphone" />
+						<p:inputText value="#{clientBean.client.telephone}" size="25" />
+
+						<f:facet name="footer">
+							<h:panelGroup>
+								<p:commandButton value="Valider"
+									action="#{clientBean.doInscription}" />
+								<p:commandButton value="Réinitialiser"
+									update="formulaireInscription" process="@this">
+									<p:resetInput target="formulaireInscription" />
+								</p:commandButton>
+
+								<p:commandButton value="Annuler"
+									action="#{navigationBean.fwIndex}"></p:commandButton>
+
+							</h:panelGroup>
+						</f:facet>
+					</h:panelGrid>
+
+				</b:container>
+			</h:form>
+
+
+		</ui:define>
+
+	</ui:decorate>
+
+</h:body>
+</html>
+

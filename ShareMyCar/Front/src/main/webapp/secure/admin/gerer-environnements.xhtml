@@ -1,0 +1,159 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+
+<h:head>
+	<title>Gestion des Environnements</title>
+</h:head>
+<h:body>
+	<ui:decorate template="#{templatesNavigationBean.navLeftTemplate}">
+
+		<ui:define name="navLeft">
+			<ui:include src="#{templatesNavigationBean.menuAdmin}"></ui:include>
+		</ui:define>
+
+		<ui:define name="content">
+
+			<!--  affiche le bouton pour afficher la fenetre de saisie de l'utilisateur à créer -->
+       	<h:form id="AddEnvironnementButton">
+				<p:commandButton value="Ajouter un Environnement"
+					icon="ui-icon-adds"
+					actionListener="#{environnementBean.ajoutEvent}"
+					update=":add:addEnvironnementDialog"
+					oncomplete="PF('addEnvironnementWidget').show()" />
+			</h:form>
+
+			<h:form id="tableau">
+				<p:dataTable var="environnement"
+					value="#{environnementBean.listEnvironnements}"
+					id="environnementTable" widgetVar="environnementTable"
+					emptyMessage="Aucun Environnement trouvé dans la table"
+					paginator="true" rows="10"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="10,20,50" style="width:800px;font-size:10px">
+
+					<p:column id="environnementId" headerText="ID" resizable="true"
+						style="width:7%">
+						<h:outputText value="#{environnement.id}" />
+					</p:column>
+
+					<p:column id="environnementLabel" headerText="Label"
+						resizable="true">
+						<h:outputText value="#{environnement.label}" />
+					</p:column>
+					<p:column id="environnementNiveauTolerance" headerText="Niveau de tolérance"
+						resizable="true">
+						<h:outputText value="#{environnement.niveauTolerance}" />
+					</p:column>
+
+					<!-- ajout des options de modification et suppression en bout de ligne du tableau -->
+					<p:column>
+						<p:commandButton id="edit"
+							update=":update:updateEnvironnementDialog"
+							icon="ui-icon-arrowrefresh-1-w"
+							oncomplete="PF('updateEnvironnementWidget').show();"
+							actionListener="#{environnementBean.editEvent(environnement.id)}"
+							title="Editer" />
+						<p:commandButton id="delete"
+							update=":delete:deleteEnvironnementDialog" icon="ui-icon-trash"
+							actionListener="#{environnementBean.editEvent(environnement.id)}"
+							oncomplete="PF('deleteEnvironnementWidget').show();"
+							title="Supprimer" />
+					</p:column>
+
+				</p:dataTable>
+			</h:form>
+
+			<!-- partie ajout d'un environnement -->
+			<h:form id="add">
+				<p:dialog header="Ajout d'un Environnement"
+					widgetVar="addEnvironnementWidget" resizable="false"
+					id="addEnvironnementDialog" modal="true">
+
+					<h:panelGrid id="addEnvironnementGrid" columns="2" cellpadding="2"
+						style="margin:0 auto;">
+
+						<f:facet name="header">
+							<h:outputLabel value="Ajout d'un Environnement" />
+						</f:facet>
+
+						<h:outputLabel for="environnementCreate" value="Environnement :" />
+						<h:inputText value="#{environnementBean.environnement.label}"
+							id="environnementCreate" />
+
+						<h:outputLabel for="niveauToleranceCreate" value="Niveau max :" />
+						<h:inputText value="#{environnementBean.environnement.niveauTolerance}"
+							id="niveauToleranceCreate" converter="javax.faces.Integer" />
+
+					</h:panelGrid>
+
+					<p:separator />
+					<p:commandButton value="Enregistrer"
+						update=":tableau:environnementTable"
+						actionListener="#{environnementBean.insert}"
+						oncomplete="PF('addEnvironnementWidget').hide()" />
+
+				</p:dialog>
+			</h:form>
+
+			<!-- frame pour la modification du environnement -->
+			<h:form id="update">
+				<p:dialog header="Modification"
+					widgetVar="updateEnvironnementWidget" resizable="false"
+					id="updateEnvironnementDialog" modal="true">
+
+					<h:panelGrid id="updateEnvironnementGrid" columns="2"
+						cellpadding="4" style="margin:0 auto;">
+						<f:facet name="header">
+							<h:outputLabel value="Modification d'un Environnement" />
+						</f:facet>
+
+						<h:outputLabel for="environnementUpdate" value="Environnement :"
+							style="color: crimson;" />
+						<h:inputText value="#{environnementBean.environnement.label}"
+							id="environnementUpdate" />
+
+					</h:panelGrid>
+					<p:separator />
+					<p:commandButton value="Enregistrer"
+						update=":tableau:environnementTable"
+						actionListener="#{environnementBean.update}"
+						oncomplete="PF('updateEnvironnementWidget').hide()" />
+				</p:dialog>
+			</h:form>
+
+			<!-- confirmation de suppression du environnement -->
+			<h:form id="delete">
+				<p:dialog header="Confirmation de la suppression"
+					widgetVar="deleteEnvironnementWidget" resizable="false"
+					id="deleteEnvironnementDialog" modal="true">
+
+					<h:panelGrid id="deleteEnvironnementGrid" columns="2"
+						cellpadding="4" style="margin:0 auto;">
+
+						<f:facet name="header">
+							<h:outputLabel
+								value="Confirmer la suppression de : #{environnementBean.environnement.label}" />
+						</f:facet>
+
+						<h:outputLabel value="Label :" />
+						<h:outputLabel value="#{environnementBean.environnement.label}" />
+
+					</h:panelGrid>
+					<p:separator />
+					<p:commandButton value="Confirmer"
+						update=":tableau:environnementTable"
+						actionListener="#{environnementBean.delete}"
+						oncomplete="PF('deleteEnvironnementWidget').hide()" />
+				</p:dialog>
+			</h:form>
+
+		</ui:define>
+
+	</ui:decorate>
+
+</h:body>
+</html>
+

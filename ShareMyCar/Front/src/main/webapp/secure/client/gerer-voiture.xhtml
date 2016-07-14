@@ -1,0 +1,94 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+
+<h:head>
+	<title>Gestion de mes Voitures</title>
+</h:head>
+<h:body>
+	<ui:decorate template="#{templatesNavigationBean.navLeftTemplate}">
+
+		<ui:define name="navLeft">
+			<ui:include src="#{templatesNavigationBean.menuClient}"></ui:include>
+		</ui:define>
+
+		<ui:define name="content">
+
+			<p:tabView>
+				<p:tab title="Ajouter">
+
+					<h:form id="formulaireAjoutVoiture">
+						<b:container>
+
+
+							<p:focus context="formulaireAjoutVoiture" />
+
+							<h:panelGrid columns="2" style="width:100%">
+								<f:facet name="header">
+									<h4>Ajouter une voiture à mon compte</h4>
+								</f:facet>
+
+								<h:outputText value="Marque : " />
+								<p:inputText value="#{voitureBean.voiture.marque}"
+									required="true"
+									requiredMessage="Aucune marque de Voiture saisie" size="25" />
+
+								<h:outputText value="Modèle : " />
+								<p:inputText value="#{voitureBean.voiture.modele}" size="25"
+									required="true"
+									requiredMessage="Aucun modèle de Voiture saisie" />
+
+								<h:outputText value="Nombre de place total : " />
+								<p:inputText value="#{voitureBean.voiture.nombrePlace}"
+									size="25" required="true"
+									requiredMessage="le nombre de place total (vous inclus) n'a pas été saisie"
+									converterMessage="Il faut indiquer un nombre" />
+
+
+								<h:outputText value="Informations complémentaires" />
+								<p:inputTextarea rows="5" cols="25" style="weight:auto"
+									counter="counter-ajoutVoiture"
+									value="#{voitureBean.voiture.infoComplementaire}"
+									maxlength="255" counterTemplate="{0} caractère(s) restant(s)."
+									autoResize="false" size="25" />
+								<h:outputText />
+								<h:outputText id="counter-ajoutVoiture" />
+
+								<f:facet name="footer">
+									<h:panelGroup>
+										<p:commandButton value="Valider"
+											action="#{voitureBean.ajouterVoiture}" />
+										<p:commandButton value="Réinitialiser"
+											update="formulaireAjoutVoiture" process="@this">
+											<p:resetInput target="formulaireAjoutVoiture" />
+										</p:commandButton>
+
+										<p:commandButton value="Annuler"
+											action="#{navigationBean.fwAccueilAdmin}"></p:commandButton>
+
+									</h:panelGroup>
+								</f:facet>
+							</h:panelGrid>
+
+						</b:container>
+					</h:form>
+				</p:tab>
+
+				<p:tab title="Modifier">
+				</p:tab>
+
+				<p:tab title="Supprimer">
+				</p:tab>
+
+			</p:tabView>
+
+
+		</ui:define>
+
+	</ui:decorate>
+
+</h:body>
+</html>
+

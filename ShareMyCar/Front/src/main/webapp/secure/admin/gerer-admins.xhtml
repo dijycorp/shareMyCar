@@ -1,0 +1,307 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+
+<h:head>
+	<title>Gestion des Admins</title>
+</h:head>
+<h:body>
+	<ui:decorate template="#{templatesNavigationBean.navLeftTemplate}">
+
+		<ui:define name="navLeft">
+			<ui:include src="#{templatesNavigationBean.menuAdmin}"></ui:include>
+		</ui:define>
+
+		<ui:define name="content">
+
+			<!--  affiche le bouton pour afficher la fenetre de saisie de l'utilisateur à créer -->
+       	<h:form id="AddUserButton">
+				<p:commandButton value="Ajouter un Administrateur"
+					icon="ui-icon-adds" actionListener="#{gestionAdminBean.ajoutEvent}"
+					update=":add:addAdminDialog"
+					oncomplete="PF('addAdminWidget').show()" />
+			</h:form>
+
+			<h:form id="tableau">
+				<p:dataTable var="admin" value="#{gestionAdminBean.listAdmins}"
+					id="adminsTable" widgetVar="adminsTable"
+					emptyMessage="Aucun Admin trouvé dans la table" paginator="true"
+					rows="10"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="10,20,50" style="width:800px;font-size:10px">
+
+					<p:column id="adminId" headerText="ID" resizable="true"
+						style="width:7%">
+						<h:outputText value="#{admin.id}" />
+					</p:column>
+
+					<p:column id="adminLogin" headerText="Login" resizable="true">
+						<h:outputText value="#{admin.login}" />
+					</p:column>
+
+					<p:column id="adminNom" headerText="Nom" resizable="true">
+						<h:outputText value="#{admin.nom}" />
+					</p:column>
+
+					<p:column id="adminPrenom" headerText="Prenom" resizable="true">
+						<h:outputText value="#{admin.prenom}" />
+					</p:column>
+
+					<!-- ajout des options de modification et suppression en bout de ligne du tableau -->
+					<p:column>
+						<p:commandButton id="edit" update=":update:updateAdminDialog"
+							icon="ui-icon-arrowrefresh-1-w"
+							actionListener="#{gestionAdminBean.editEvent(admin)}"
+							oncomplete="PF('updateAdminWidget').show();" title="Editer" />
+
+						<p:commandButton id="editMdp"
+							update=":updateMdp:updateMdpAdminDialog" icon="ui-icon-fa-edit"
+							actionListener="#{gestionAdminBean.editEvent(admin)}"
+							oncomplete="PF('updateMdpAdminWidget').show();"
+							title="changer mdp" />
+
+						<p:commandButton id="delete" update=":delete:deleteAdminDialog"
+							icon="ui-icon-trash"
+							actionListener="#{gestionAdminBean.editEvent(admin)}"
+							oncomplete="PF('deleteAdminWidget').show();" title="Supprimer" />
+					</p:column>
+
+				</p:dataTable>
+			</h:form>
+
+			<!-- partie option des popup -->
+			<h:form id="add">
+
+				<p:dialog header="Ajout d'un Administrateur"
+					widgetVar="addAdminWidget" resizable="false" id="addAdminDialog"
+					modal="true">
+
+					<h:panelGrid id="addAdminGrid" columns="2" cellpadding="2"
+						style="margin:0 auto;">
+
+						<f:facet name="header">
+							<h:outputLabel value="Ajout d'un utilisateur Admin" />
+						</f:facet>
+
+						<h:outputLabel for="adminLoginCreate" value="Login :" />
+						<h:inputText value="#{gestionAdminBean.admin.login}"
+							id="adminLoginCreate" required="true" requiredMessage="Il faut renseigner à Login">
+							<f:validator validatorId="loginValidator" />
+						</h:inputText>
+
+						<h:outputLabel for="adminNomCreate" value="Nom :" />
+						<h:inputText value="#{gestionAdminBean.admin.nom}"
+							id="adminNomCreate" required="true" requiredMessage="Il faut renseigner un nom" />
+
+						<h:outputLabel for="adminPrenomCreate" value="Prenom :" />
+						<h:inputText value="#{gestionAdminBean.admin.prenom}"
+							id="adminPrenomCreate" required="true" requiredMessage="Il faut renseigner un prénom" />
+
+						<h:outputLabel for="adminEmailCreate" value="Email :" />
+						<h:inputText value="#{gestionAdminBean.admin.email}"
+							id="adminEmailCreate" required="true" requiredMessage="Il faut renseigner un email">
+							<f:validator validatorId="emailValidator" />
+						</h:inputText>
+					</h:panelGrid>
+
+					<p:separator />
+
+					<h:panelGrid cellpadding="4" style="margin:0 auto;">
+						<!-- 	gestion du mot de passe -->
+						<h:outputLabel for="adminPasswordCreate"
+							value="Choix du mot de passe" />
+						<p:password id="adminPasswordCreate"
+							value="#{gestionAdminBean.password1}"
+							match="adminPasswordConfirmeCreate" feedback="true"
+							required="true" requiredMessage="Il faut renseigner un mot de passe" />
+
+						<h:outputLabel for="adminPasswordConfirmeCreate"
+							value="Confirmer le mot de passe" />
+						<p:password id="adminPasswordConfirmeCreate"
+							value="#{gestionAdminBean.password2}" required="true" requiredMessage="Aucun mot de passe de confirmation saisie" />
+					</h:panelGrid>
+
+					<p:separator />
+
+					<h:panelGrid columns="2" cellpadding="0" style="margin:0 auto;">
+						<f:facet name="header">
+							<h:outputLabel value="Choix du/des rôle(s)" />
+						</f:facet>
+
+						<h:selectManyCheckbox id="adminRoleList"
+							value="#{gestionAdminBean.admin.roles}" converter="roleConverter" required="true" requiredMessage="Aucun rôle sélectionné">
+							<f:selectItems value="#{gestionAdminBean.roleBean.listRoles}"
+								var="role" itemLabel="#{role.label}" itemValue="#{role}" />
+							<f:attribute name="collectionType" value="java.util.ArrayList" />
+						</h:selectManyCheckbox>
+
+					</h:panelGrid>
+
+					<p:separator />
+
+					<h:panelGrid columns="2" cellpadding="0" style="margin:0 auto;">
+						<h:outputText value="Statut du compte : " />
+						<p:selectBooleanButton id="adminCompteActif"
+							value="#{gestionAdminBean.admin.actif}" onLabel="Actif"
+							offLabel="Désactivé" onIcon="ui-icon-check"
+							offIcon="ui-icon-close" />
+					</h:panelGrid>
+
+					<p:separator />
+
+					<h:panelGrid columns="2" cellpadding="0" style="margin:0 auto;">
+						<h:outputText value="Compte restraint : " />
+						<p:selectBooleanButton id="adminCompteRestraint"
+							value="#{gestionAdminBean.admin.actif}" onLabel="Restraint"
+							offLabel="Non restraint" onIcon="ui-icon-close"
+							offIcon="ui-icon-check" />
+					</h:panelGrid>
+
+					<p:separator />
+					<p:commandButton value="Enregistrer" update=":tableau:adminsTable"
+						actionListener="#{gestionAdminBean.insert}"
+						oncomplete="PF('addAdminWidget').hide()" />
+
+				</p:dialog>
+
+			</h:form>
+
+			<h:form id="update">
+				<p:dialog header="Modification" widgetVar="updateAdminWidget"
+					resizable="false" id="updateAdminDialog" modal="true">
+
+					<h:panelGrid id="updateAdminGrid" columns="2" cellpadding="4"
+						style="margin:0 auto;">
+
+						<f:facet name="header">
+							<h:outputLabel value="Modification d'un Admin" />
+						</f:facet>
+
+						<h:outputLabel for="adminLoginUpdate" value="Login :" />
+						<h:inputText value="#{gestionAdminBean.admin.login}"
+							id="adminLoginUpdate" required="true" requiredMessage="Aucun login renseigné">
+							</h:inputText>
+
+						<h:outputLabel for="adminNomUpdate" title="Nom" value="Nom :" />
+						<h:inputText value="#{gestionAdminBean.admin.nom}"
+							id="adminNomUpdate" required="true" requiredMessage="Il faut renseigner un nom"/>
+
+						<h:outputLabel for="adminPrenomUpdate" title="Prenom"
+							value="Prenom :" required="true" requiredMessage="Il faut renseigner à prénom" />
+						<h:inputText value="#{gestionAdminBean.admin.prenom}"
+							id="adminPrenomUpdate" />
+
+						<h:outputLabel for="adminEmailCreate" value="Email :" />
+						<h:inputText value="#{gestionAdminBean.admin.email}"
+							id="adminEmailCreate" required="true" requiredMessage="Il faut renseigner à Email">
+						</h:inputText>
+					</h:panelGrid>
+
+
+					<p:separator />
+
+					<h:panelGrid columns="2" cellpadding="0" style="margin:0 auto;">
+						<f:facet name="header">
+							<h:outputLabel value="Choix du/des rôle(s)" />
+						</f:facet>
+
+						<h:selectManyCheckbox id="adminRoleList"
+							value="#{gestionAdminBean.admin.roles}" converter="roleConverter" required="true" requiredMessage="Il faut renseigner au moin un rôle">
+							<f:selectItems value="#{gestionAdminBean.roleBean.listRoles}"
+								var="role" itemLabel="#{role.label}" itemValue="#{role}" />
+							<f:attribute name="collectionType" value="java.util.ArrayList" />
+						</h:selectManyCheckbox>
+
+					</h:panelGrid>
+
+					<p:separator />
+
+					<h:panelGrid columns="2" cellpadding="0" style="margin:0 auto;">
+						<h:outputText value="Statut du compte : " />
+						<p:selectBooleanButton id="adminCompteActif"
+							value="#{gestionAdminBean.admin.actif}" onLabel="Actif"
+							offLabel="Désactivé" onIcon="ui-icon-check"
+							offIcon="ui-icon-close" />
+					</h:panelGrid>
+
+					<p:separator />
+
+					<h:panelGrid columns="2" cellpadding="0" style="margin:0 auto;">
+						<h:outputText value="Compte restraint : " />
+						<p:selectBooleanButton id="adminCompteRestraint"
+							value="#{gestionAdminBean.admin.actif}" onLabel="Restraint"
+							offLabel="Non restraint" onIcon="ui-icon-close"
+							offIcon="ui-icon-check" />
+					</h:panelGrid>
+
+					<p:separator />
+					
+					<p:commandButton value="Enregistrer" update=":tableau:adminsTable"
+						actionListener="#{gestionAdminBean.update}"
+						oncomplete="PF('updateAdminWidget').hide()" />
+				</p:dialog>
+			</h:form>
+
+			<h:form id="updateMdp">
+				<p:dialog header="Changer le mot de passe"
+					widgetVar="updateMdpAdminWidget" resizable="false"
+					id="updateMdpAdminDialog" modal="true">
+
+					<h:panelGrid id="updateMdpAdminGrid" columns="2" cellpadding="4"
+						style="margin:0 auto;">
+
+						<h:outputLabel for="adminPasswordCreate"
+							value="Choix du mot de passe" />
+						<p:password id="adminPasswordCreate"
+							value="#{gestionAdminBean.password1}"
+							match="adminPasswordConfirmeCreate" feedback="true"
+							required="true" requiredMessage="Aucun mot de passe renseigné"/>
+
+						<h:outputLabel for="adminPasswordConfirmeCreate"
+							value="Confirmer le mot de passe" />
+						<p:password id="adminPasswordConfirmeCreate"
+							value="#{gestionAdminBean.password2}" required="true" requiredMessage="Aucun mot de passe de confirmation saisie" />
+
+					</h:panelGrid>
+					<p:separator />
+					<p:commandButton value="Enregistrer" update=":tableau:adminsTable"
+						actionListener="#{gestionAdminBean.updateMdp}"
+						oncomplete="PF('updateMdpAdminWidget').hide()" />
+				</p:dialog>
+			</h:form>
+
+			<!-- 			confirmation de suppression du admin -->
+			<h:form id="delete">
+				<p:dialog header="Confirmation de la suppression"
+					widgetVar="deleteAdminWidget" resizable="false"
+					id="deleteAdminDialog" modal="true">
+
+					<h:panelGrid id="deleteAdminGrid" columns="2" cellpadding="2"
+						style="margin:0 auto;">
+
+						<f:facet name="header">
+							<h:outputLabel
+								value="Confirmer la suppression de : #{gestionAdminBean.admin.login}" />
+						</f:facet>
+
+						<h:outputLabel value="Login : #{gestionAdminBean.admin.login}" />
+
+						<h:outputLabel value="Email : #{gestionAdminBean.admin.email}" />
+
+					</h:panelGrid>
+					<p:separator />
+					<p:commandButton value="Confirmer" update=":tableau:adminsTable"
+						actionListener="#{gestionAdminBean.delete}"
+						oncomplete="PF('deleteAdminWidget').hide()" />
+				</p:dialog>
+			</h:form>
+
+		</ui:define>
+
+	</ui:decorate>
+
+</h:body>
+</html>
+

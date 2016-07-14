@@ -1,0 +1,72 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+
+<h:head>
+	<title>Nouveautés</title>
+</h:head>
+<h:body>
+	<ui:decorate template="#{templatesNavigationBean.basicTemplate}">
+
+		<ui:define name="content">
+			<h:form>
+				<p:dataScroller value="#{trajetBean.trajetService.nouveaute(50)}"
+					var="trajet" chunkSize="5">
+					<f:facet name="header">Nouveautés</f:facet>
+					<f:facet name="loader">
+						<p:commandButton type="button" value="Voir plus"
+							icon="ui-icon-circle-triangle-s" />
+					</f:facet>
+
+					<h:panelGrid columns="3" class="miniContaint">
+						<p:outputPanel>
+							<h:panelGrid columns="2">
+								<h:outputText value="Ville de départ:" />
+								<h:outputText value="#{trajet.villeDepart.nomVille}"
+									style="font-weight: bold" />
+
+								<h:outputText value="Ville d'arrivé:" />
+								<h:outputText value="#{trajet.villeArrive.nomVille}"
+									style="font-weight: bold" />
+
+								<h:outputText value="Départ le:" />
+								<h:outputText value="#{trajet.dateDepart}"
+									style="font-weight: bold">
+									<f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+								</h:outputText>
+
+								<h:outputText value="Heure de départ :" />
+								<h:outputText value="#{trajet.dateDepart}"
+									style="font-weight: bold">
+									<f:convertDateTime type="time" pattern="HH:mm" />
+								</h:outputText>
+							</h:panelGrid>
+						</p:outputPanel>
+
+						<p:outputPanel>
+							<h:panelGrid columns="2">
+								<h:outputLabel value="Prix : " />
+								<h:outputLabel value="#{trajet.prix} CFA" />
+								<h:outputLabel value="Place(s) disponible(s) : " />
+								<h:outputLabel value="#{trajet.placeDisponible}" />
+								<h:outputLabel value="Chauffeur : " />
+								<h:outputLabel value="#{trajet.chauffeur.login}" />
+							</h:panelGrid>
+						</p:outputPanel>
+						<p:outputPanel>
+							<h:panelGrid columns="1">
+								<p:commandButton value="Voir" label="Consulter les détails"
+									action="#{trajetBean.consulterTrajet(trajet)}">
+								</p:commandButton>
+							</h:panelGrid>
+						</p:outputPanel>
+
+					</h:panelGrid>
+				</p:dataScroller>
+			</h:form>
+		</ui:define>
+	</ui:decorate>
+</h:body>
+</html>

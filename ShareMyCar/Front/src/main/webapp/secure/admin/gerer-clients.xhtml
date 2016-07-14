@@ -1,0 +1,349 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+
+<h:head>
+	<title>Gestion des Clients</title>
+</h:head>
+<h:body>
+	<ui:decorate template="#{templatesNavigationBean.navLeftTemplate}">
+
+		<ui:define name="navLeft">
+			<ui:include src="#{templatesNavigationBean.menuAdmin}"></ui:include>
+		</ui:define>
+
+		<ui:define name="content">
+
+			<!--  affiche le bouton pour afficher la fenetre de saisie de l'utilisateur à créer -->
+       	<h:form id="AddUserButton">
+				<p:commandButton value="Ajouter un Utilisateur" icon="ui-icon-adds"
+					actionListener="#{gestionClientBean.ajoutEvent}"
+					update=":add:addClientDialog"
+					oncomplete="PF('addClientWidget').show()" />
+			</h:form>
+
+			<h:form id="tableau">
+				<p:dataTable var="client" value="#{gestionClientBean.listClient}"
+					id="usersTable" widgetVar="usersTable"
+					emptyMessage="Aucun Client trouvé dans la table" paginator="true"
+					rows="10"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="10,20,50" style="width:800px;font-size:10px">
+
+					<p:column id="clientId" headerText="ID" resizable="true"
+						style="width:7%">
+						<h:outputText value="#{client.id}" />
+					</p:column>
+
+					<p:column id="clientLogin" headerText="Login" resizable="true">
+						<h:outputText value="#{client.login}" />
+					</p:column>
+
+					<p:column id="clientNom" headerText="Nom" resizable="true">
+						<h:outputText value="#{client.nom}" />
+					</p:column>
+
+					<p:column id="clientPrenom" headerText="Prenom" resizable="true">
+						<h:outputText value="#{client.prenom}" />
+					</p:column>
+
+					<!-- ajout des options de modification et suppression en bout de ligne du tableau -->
+					<p:column>
+						<p:commandButton id="edit" update=":update:updateClientDialog"
+							icon="ui-icon-arrowrefresh-1-w"
+							oncomplete="PF('updateClientWidget').show();"
+							actionListener="#{gestionClientBean.editEvent(client)}"
+							title="Editer" />
+
+						<p:commandButton id="editMdp"
+							update=":updateMdp:updateMdpClientDialog" icon="ui-icon-fa-edit"
+							actionListener="#{gestionClientBean.editEvent(client)}"
+							oncomplete="PF('updateMdpClientWidget').show();"
+							title="changer mdp" />
+
+						<p:commandButton id="delete" update=":delete:deleteClientDialog"
+							icon="ui-icon-trash"
+							actionListener="#{gestionClientBean.editEvent(client)}"
+							oncomplete="PF('deleteClientWidget').show();" title="Supprimer" />
+
+					</p:column>
+
+				</p:dataTable>
+			</h:form>
+
+			<!-- partie option des popup -->
+
+			<h:form id="add">
+
+				<p:dialog header="Ajout d'un Utilisateur"
+					widgetVar="addClientWidget" resizable="false" id="addClientDialog"
+					modal="true">
+
+					<h:panelGrid id="addClientGrid" columns="2" cellpadding="2"
+						style="margin:0 auto;">
+
+						<f:facet name="header">
+							<h:outputLabel value="Ajout d'un utilisateur Client" />
+						</f:facet>
+
+						<h:outputLabel for="clientLoginCreate" value="Login :" />
+						<h:inputText value="#{gestionClientBean.client.login}"
+							id="clientLoginCreate" required="true"
+							requiredMessage="Il faut renseigner à Login">
+							<f:validator validatorId="loginValidator" />
+						</h:inputText>
+
+						<h:outputLabel for="clientNomCreate" value="Nom :" />
+						<h:inputText value="#{gestionClientBean.client.nom}"
+							id="clientNomCreate" required="true"
+							requiredMessage="Il faut renseigner à nom">
+						</h:inputText>
+
+						<h:outputLabel for="clientPrenomCreate" value="Prenom :" />
+						<h:inputText value="#{gestionClientBean.client.prenom}"
+							id="clientPrenomCreate" required="true"
+							requiredMessage="Il faut renseigner à prénom" />
+
+						<h:outputLabel for="clientEmailCreate" value="Email :" />
+						<h:inputText value="#{gestionClientBean.client.email}"
+							id="clientEmailCreate" required="true"
+							requiredMessage="Il faut renseigner à Email">
+							<f:validator validatorId="emailValidator" />
+						</h:inputText>
+					</h:panelGrid>
+
+					<p:separator />
+
+					<!-- 	gestion du mot de passe -->
+					<h:panelGrid columns="2">
+						<h:outputLabel for="clientPasswordCreate"
+							value="Choix du mot de passe" />
+						<p:password id="clientPasswordCreate"
+							value="#{gestionClientBean.password1}"
+							match="clientPasswordConfirmeCreate" feedback="true"
+							required="true" requiredMessage="Aucun mot de passe renseigné" />
+
+						<h:outputLabel for="clientPasswordConfirmeCreate"
+							value="Confirmer le mot de passe" />
+						<p:password id="clientPasswordConfirmeCreate"
+							value="#{gestionClientBean.password2}" required="true"
+							requiredMessage="Aucune confirmation renseigné" />
+					</h:panelGrid>
+
+					<p:separator />
+
+					<h:panelGrid columns="2" cellpadding="5" style="margin:0 auto;">
+						<f:facet name="header">
+							<h:outputLabel value="Choix du/des rôle(s)" />
+						</f:facet>
+
+						<h:selectManyCheckbox id="clientRoleList"
+							value="#{gestionClientBean.client.roles}"
+							converter="roleConverter" required="true"
+							requiredMessage="Il faut renseigner au moin un rôle">
+							<f:selectItems value="#{gestionClientBean.roleBean.listRoles}"
+								var="role" itemLabel="#{role.label}" itemValue="#{role}" />
+							<f:attribute name="collectionType" value="java.util.ArrayList" />
+						</h:selectManyCheckbox>
+
+					</h:panelGrid>
+
+					<p:separator />
+
+					<h:panelGrid columns="2" cellpadding="5" style="margin:0 auto;">
+						<f:facet name="header">
+							<h:outputLabel value="Choix du/des environnement(s)" />
+						</f:facet>
+
+						<h:selectManyCheckbox id="clientEnvList"
+							value="#{gestionClientBean.client.environnements}"
+							converter="environnementConverter">
+							<f:selectItems
+								value="#{gestionClientBean.environnementBean.listEnvironnements}"
+								var="env" itemLabel="#{env.label}" itemValue="#{env}" />
+							<f:attribute name="collectionType" value="java.util.ArrayList" />
+						</h:selectManyCheckbox>
+					</h:panelGrid>
+
+					<p:separator />
+					<p:commandButton value="Enregistrer" update=":tableau:usersTable"
+						actionListener="#{gestionClientBean.insert}"
+						oncomplete="PF('addClientWidget').hide()" />
+
+				</p:dialog>
+			</h:form>
+
+			<!-- frame pour la modification du client -->
+			<h:form id="update">
+				<p:dialog header="Modification" widgetVar="updateClientWidget"
+					resizable="false" id="updateClientDialog" modal="true">
+
+					<h:panelGrid id="updateClientGrid" columns="2" cellpadding="4"
+						style="margin:0 auto;">
+
+						<f:facet name="header">
+							<h:outputLabel value="Modification d'un Client" />
+						</f:facet>
+
+						<h:outputLabel for="clientLoginUpdate" value="Login :" />
+						<h:inputText value="#{gestionClientBean.client.login}"
+							id="clientLoginUpdate" required="true"
+							requiredMessage="Il faut renseigner à Login">
+						</h:inputText>
+
+						<h:outputLabel for="clientNomUpdate" title="Nom" value="Nom :" />
+						<h:inputText value="#{gestionClientBean.client.nom}"
+							id="clientNomUpdate" required="true"
+							requiredMessage="Il faut renseigner à nom" />
+
+						<h:outputLabel for="clientPrenomUpdate" title="Prenom"
+							value="Prenom :" />
+						<h:inputText value="#{gestionClientBean.client.prenom}"
+							id="clientPrenomUpdate" required="true"
+							requiredMessage="Il faut renseigner à prenom" />
+
+						<h:outputLabel for="clientEmailCreate" value="Email :" />
+						<h:inputText value="#{gestionClientBean.client.email}"
+							id="clientEmailCreate" required="true"
+							requiredMessage="Il faut renseigner à Email">
+						</h:inputText>
+
+						<h:outputLabel for="clientDateUpdate" title="Date d'inscription"
+							value="Date d'inscription :" />
+						<p:calendar pattern="dd-MM-yyyy HH:mm:ss"
+							value="#{gestionClientBean.client.dateInscription}"
+							id="clientDateUpdate" required="true"
+							requiredMessage="La date d'inscription ne peut pas être vide">
+							<f:convertDateTime pattern="dd-MM-yyyy HH:mm:ss" />
+						</p:calendar>
+
+					</h:panelGrid>
+					<p:separator />
+					<h:panelGrid columns="2" cellpadding="0" style="margin:0 auto;">
+						<f:facet name="header">
+							<h:outputLabel value="Choix du/des rôle(s)" />
+						</f:facet>
+
+						<h:selectManyCheckbox id="clientRoleList"
+							value="#{gestionClientBean.client.roles}"
+							converter="roleConverter" required="true"
+							requiredMessage="Il faut renseigner au moin un rôle">
+							<f:selectItems value="#{gestionClientBean.roleBean.listRoles}"
+								var="role" itemLabel="#{role.label}" itemValue="#{role}" />
+							<!-- important pour ne pas voir les leazy initialization -->
+							<f:attribute name="collectionType" value="java.util.ArrayList" />
+						</h:selectManyCheckbox>
+
+					</h:panelGrid>
+
+					<p:separator />
+
+					<h:panelGrid columns="2" cellpadding="0" style="margin:0 auto;">
+						<f:facet name="header">
+							<h:outputLabel value="Choix du/des environnement(s)" />
+						</f:facet>
+
+						<h:selectManyCheckbox id="clientEnvList"
+							value="#{gestionClientBean.client.environnements}"
+							converter="environnementConverter">
+							<f:selectItems
+								value="#{gestionClientBean.environnementBean.listEnvironnements}"
+								var="env" itemLabel="#{env.label}" itemValue="#{env}" />
+							<f:attribute name="collectionType" value="java.util.ArrayList" />
+						</h:selectManyCheckbox>
+					</h:panelGrid>
+
+					<p:separator />
+
+					<h:panelGrid columns="2" cellpadding="0" style="margin:0 auto;">
+						<h:outputText value="Statut du compte : " />
+						<p:selectBooleanButton id="clientCompteActif"
+							value="#{gestionClientBean.client.actif}" onLabel="Actif"
+							offLabel="Désactivé" onIcon="ui-icon-check"
+							offIcon="ui-icon-close" />
+					</h:panelGrid>
+
+					<p:separator />
+
+					<h:panelGrid columns="2" cellpadding="0" style="margin:0 auto;">
+						<h:outputText value="Compte restraint : " />
+						<p:selectBooleanButton id="clientCompteRestraint"
+							value="#{gestionClientBean.client.actif}" onLabel="Restraint"
+							offLabel="Non restraint" onIcon="ui-icon-close"
+							offIcon="ui-icon-check" />
+					</h:panelGrid>
+
+					<p:separator />
+					<p:commandButton value="Enregistrer" update=":tableau:usersTable"
+						actionListener="#{gestionClientBean.update}"
+						oncomplete="PF('updateClientWidget').hide()" />
+				</p:dialog>
+			</h:form>
+
+			<!-- 			frame de modification du mot de passe -->
+			<h:form id="updateMdp">
+				<p:dialog header="Changer le mot de passe"
+					widgetVar="updateMdpClientWidget" resizable="false"
+					id="updateMdpClientDialog" modal="true">
+
+					<h:panelGrid id="updateMdpClientGrid" columns="2" cellpadding="4"
+						style="margin:0 auto;">
+
+						<h:outputLabel for="clientPasswordCreate"
+							value="Choix du mot de passe" />
+						<p:password id="clientPasswordCreate"
+							value="#{gestionClientBean.password1}"
+							match="clientPasswordConfirmeCreate" feedback="true"
+							required="true" requiredMessage="Aucun mot de passe saisie" />
+
+						<h:outputLabel for="clientPasswordConfirmeCreate"
+							value="Confirmer le mot de passe" />
+						<p:password id="clientPasswordConfirmeCreate"
+							value="#{gestionClientBean.password2}" required="true"
+							requiredMessage="Aucune confirmation saisie" />
+
+					</h:panelGrid>
+					<p:separator />
+					<p:commandButton value="Enregistrer" update=":tableau:usersTable"
+						actionListener="#{gestionClientBean.updateMdp}"
+						oncomplete="PF('updateMdpClientWidget').hide()" />
+				</p:dialog>
+			</h:form>
+
+			<!-- 			confirmation de suppression du client -->
+			<h:form id="delete">
+				<p:dialog header="Confirmation de la suppression"
+					widgetVar="deleteClientWidget" resizable="false"
+					id="deleteClientDialog" modal="true">
+
+					<h:panelGrid id="deleteClientGrid" columns="2" cellpadding="4"
+						style="margin:0 auto;">
+
+						<f:facet name="header">
+							<h:outputLabel
+								value="Confirmer la suppression de : #{gestionClientBean.client.login}" />
+						</f:facet>
+
+						<h:outputLabel value="Login :" />
+						<h:outputLabel value="#{gestionClientBean.client.login}" />
+
+						<h:outputLabel value="Email :" />
+						<h:outputLabel value="#{gestionClientBean.client.email}" />
+
+					</h:panelGrid>
+					<p:separator />
+					<p:commandButton value="Confirmer" update=":tableau:usersTable"
+						actionListener="#{gestionClientBean.delete}"
+						oncomplete="PF('deleteClientWidget').hide()" />
+				</p:dialog>
+			</h:form>
+
+		</ui:define>
+
+	</ui:decorate>
+
+</h:body>
+</html>
+

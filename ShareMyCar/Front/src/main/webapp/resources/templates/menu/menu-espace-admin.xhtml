@@ -1,0 +1,55 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:form>
+		<!-- menu  -->
+		<p:menu toggleable="true" style="weight:100%">
+			<p:submenu label="Personnels">
+				<p:menuitem value="Mot de passe"
+					action="#{navigationBean.fwChangerMDPAdmin}" icon="ui-icon-disk" />
+				<p:menuitem value="Mise à jour"
+					action="#{navigationBean.fwModifierCompteAdmin}"
+					icon="ui-icon-arrowrefresh-1-w" />
+			</p:submenu>
+
+			<p:submenu label="Utilisateurs">
+				<p:menuitem value="Gestion des clients"
+					action="#{navigationBean.fwGererUsersClients}" icon="ui-icon-close"
+					title="Gestion des clients" />
+				<p:menuitem value="Gestion des admins"
+					action="#{navigationBean.fwGererUsersAdmins}" icon="ui-icon-close"
+					title="Gestion des administrateur" />
+				<p:menuitem value="Gestion des Rôles"
+					action="#{navigationBean.fwGererRolesAdmin}" icon="ui-icon-close"
+					title="Gestion des Rôles" />
+				<p:menuitem value="Gestion des Envi"
+					action="#{navigationBean.fwGererEnvironnementsAdmin}" icon="ui-icon-close"
+					title="Gestion des Environnements" />
+			</p:submenu>
+
+			<p:submenu label="Trajets">
+				<p:menuitem value="Gestion des Trajets"
+					action="#{navigationBean.fwGererTrajetsAdmin}" icon="ui-icon-close"
+					title="Gestion des Trajets" />
+				<p:menuitem value="Publier pour"
+					action="#{navigationBean.fwPublierTrajetAdmin}"
+					icon="ui-icon-close" />
+			</p:submenu>
+			<p:submenu label="Réservations">
+				<p:menuitem value="Listes" action="#{navigationBean.fwAccueilAdmin}"
+					icon="ui-icon-close" />
+				<p:menuitem value="Réserver pour" action="#{navigationBean.fwAccueilAdmin}"
+					icon="ui-icon-close" />
+			</p:submenu>
+			<p:submenu label="Others">
+				<p:menuitem value="Primeface" url="http://www.primefaces.org"
+					icon="ui-icon-home" />
+			</p:submenu>
+		</p:menu>
+
+	</h:form>
+</ui:composition>

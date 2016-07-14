@@ -1,0 +1,220 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com</groupId>
+	<artifactId>ShareMyCar</artifactId>
+	<version>1</version>
+	<packaging>pom</packaging>
+	<name>ShareMyCar</name>
+	<description>Projet de gestion d'un site de mise en relation de personne pour gérer du covoiturage</description>
+	<modules>
+		<module>Back</module>
+		<module>Front</module>
+	</modules>
+
+
+	<properties>
+
+		<java.version>1.7</java.version>
+
+		<!-- Spring -->
+		<spring-framework.version>4.1.7.RELEASE</spring-framework.version>
+
+		<!-- Hibernate / JPA -->
+		<hibernate.version>4.3.10.Final</hibernate.version>
+
+		<!-- Logging -->
+		<log4j.version>1.2.17</log4j.version>
+
+		<!-- Test -->
+		<junit.version>4.12</junit.version>
+
+		<!-- mysql -->
+		<mysql.version>5.1.36</mysql.version>
+
+		<!-- primefaces -->
+		<primefaces.version>5.2</primefaces.version>
+		<primefaces.themes.version>1.0.10</primefaces.themes.version>
+		<primefaces.extension.version>3.2.0</primefaces.extension.version>
+
+		<!-- faces JSP -->
+		<faces.version>2.2.11</faces.version>
+
+		<!-- Servlet API -->
+		<servletApi.version>3.0.1</servletApi.version>
+
+		<!-- BootStrap -->
+		<bootstrap.version>3.3.5</bootstrap.version>
+
+		<!-- bootsfaces -->
+		<bootsfaces.version>0.7.0</bootsfaces.version>
+
+		<!-- google maps -->
+		<googlemaps.version>0.1.7</googlemaps.version>
+
+	</properties>
+
+	<dependencyManagement>
+
+		<dependencies>
+
+			<!-- JSP -->
+			<dependency>
+				<groupId>com.sun.faces</groupId>
+				<artifactId>jsf-api</artifactId>
+				<version>${faces.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.sun.faces</groupId>
+				<artifactId>jsf-impl</artifactId>
+				<version>${faces.version}</version>
+			</dependency>
+
+			<!-- TESTS UNITAIRES -->
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${junit.version}</version>
+			</dependency>
+
+			<!-- BASE DE DONNEES -->
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-entitymanager</artifactId>
+				<version>${hibernate.version}</version>
+			</dependency>
+
+			<!-- DRIVERS MYSQL -->
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>${mysql.version}</version>
+			</dependency>
+
+			<!-- PRIME FACES -->
+			<dependency>
+				<groupId>org.primefaces</groupId>
+				<artifactId>primefaces</artifactId>
+				<version>${primefaces.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.primefaces.themes</groupId>
+				<artifactId>all-themes</artifactId>
+				<version>${primefaces.themes.version}</version>
+			</dependency>
+
+			<!-- LOGS -->
+			<dependency>
+				<groupId>log4j</groupId>
+				<artifactId>log4j</artifactId>
+				<version>${log4j.version}</version>
+			</dependency>
+
+			<!-- SPRING FRAMEWORKS -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context</artifactId>
+				<version>${spring-framework.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-core</artifactId>
+				<version>${spring-framework.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-tx</artifactId>
+				<version>${spring-framework.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-test</artifactId>
+				<version>${spring-framework.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-jdbc</artifactId>
+				<version>${spring-framework.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-orm</artifactId>
+				<version>${spring-framework.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-expression</artifactId>
+				<version>${spring-framework.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>javax.servlet-api</artifactId>
+				<version>${servletApi.version}</version>
+			</dependency>
+
+			<!-- mise en forme front -->
+			<dependency>
+				<groupId>net.bootsfaces</groupId>
+				<artifactId>bootsfaces</artifactId>
+				<version>${bootsfaces.version}</version>
+				<scope>compile</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.primefaces.extensions</groupId>
+				<artifactId>primefaces-extensions</artifactId>
+				<version>${primefaces.extension.version}</version>
+				<scope>compile</scope>
+			</dependency>
+
+			<!-- google maps -->
+			<dependency>
+				<groupId>com.google.maps</groupId>
+				<artifactId>google-maps-services</artifactId>
+				<version>${googlemaps.version}</version>
+			</dependency>
+
+		</dependencies>
+
+	</dependencyManagement>
+
+	<build>
+		<plugins>
+			<!--version de java -->
+			<!-- Generic properties -->
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.0.2</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+		</plugins>
+
+	</build>
+	<repositories>
+		<repository>
+			<id>prime-repo</id>
+			<name>PrimeFaces Maven Repository</name>
+			<url>http://repository.primefaces.org</url>
+			<layout>default</layout>
+		</repository>
+	</repositories>
+
+
+	<scm>
+		<developerConnection>Jérémie Diacono</developerConnection>
+	</scm>
+</project>

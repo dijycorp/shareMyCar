@@ -1,0 +1,167 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<h:head>
+	<title>Trajet de #{trajetBean.trajet.villeDepart.nomVille} vers #{trajetBean.trajet.villeArrive.nomVille}</title>
+</h:head>
+<h:body>
+	<ui:decorate template="#{templatesNavigationBean.basicTemplate}">
+
+		<!-- écrase le contenu du template -->
+		<ui:define name="content">
+
+			<!-- declare le formulaire de saisie -->
+			<h:form id="ConsultationTrajet">
+
+				<!-- déclaration du cadre principale -->
+				<b:row>
+					<!-- colonne de gauche -->
+
+					<b:column col-sm="6" col-xs="12" class="miniContaint1">
+						<h:panelGrid columns="3" style="width:100%">
+							<f:facet name="header">
+								<h3 id="Titre">Trajet de
+									#{trajetBean.trajet.villeDepart.nomVille} vers
+									#{trajetBean.trajet.villeArrive.nomVille}</h3>
+								<p:separator />
+							</f:facet>
+
+
+							<p:outputPanel>
+								<h:panelGrid columns="2">
+									<h:outputText value="Ville de départ :" />
+									<h:outputText value="#{trajetBean.trajet.villeDepart.nomVille}" />
+									<h:outputText value="Ville d'arrivé :" />
+									<h:outputText value="#{trajetBean.trajet.villeArrive.nomVille}" />
+
+									<h:outputText value="Jour du départ :" />
+									<h:outputText value="#{trajetBean.trajet.dateDepart}">
+										<f:convertDateTime pattern="dd/MM/yyyy" />
+									</h:outputText>
+
+									<h:outputText value="Heure du départ :" />
+									<h:outputText value="#{trajetBean.trajet.dateDepart}">
+										<f:convertDateTime pattern="HH:mm" />
+									</h:outputText>
+
+								</h:panelGrid>
+							</p:outputPanel>
+
+							<p:outputPanel>
+								<h:panelGrid columns="1">
+									<h:outputText value="Distance" />
+									<h:outputText value="#{trajetBean.trajet.distance} KM" />
+
+								</h:panelGrid>
+							</p:outputPanel>
+
+							<p:outputPanel>
+								<h:panelGrid columns="2">
+									<h:outputText value="Arrivée estimé à :" />
+									<h:outputText value="" />
+									<h:outputText value="Durée estimé :" />
+									<h:outputText value="#{trajetBean.trajet.dureeEstime}" />
+								</h:panelGrid>
+							</p:outputPanel>
+
+
+
+							<h:outputText />
+
+
+						</h:panelGrid>
+
+						<p:separator />
+
+
+					<h:panelGrid columns="2">
+						<p:outputPanel>
+							<h:panelGrid columns="2">
+								<h:outputText value="Véhicule : " />
+								<h:outputText id="vehiculeChoisi" value="#{trajetBean.trajet.voiture.modele}" />
+							</h:panelGrid>
+							<h:panelGrid columns="2">
+								<h:outputText value="#{trajetBean.trajet.voiture.photosVoiture['0'].url}" />
+								<h:outputText value="#{trajetBean.trajet.infoComplementaire}" />
+							</h:panelGrid>
+						</p:outputPanel>
+					</h:panelGrid>
+
+
+					</b:column>
+
+
+
+					<!-- colonne de droite -->
+					<b:column col-sm="5" col-xs="12">
+						<b:row class="miniContaint1">
+							<h:panelGrid columns="2" style="text-align:left;width:100%"
+								cellpadding="5" cellspacing="5">
+
+								<f:facet name="header">
+									<h4>Prix : #{trajetBean.trajet.prix}</h4>
+									<p:separator />
+								</f:facet>
+
+								<h:outputText value="Mode d'acceptation :" />
+								<p:selectBooleanButton id="acception"
+									value="#{trajetBean.trajet.autoSoumission}"
+									onLabel="Automatique" offLabel="Manuelle"
+									onIcon="ui-icon-check" offIcon="ui-icon-close" disabled="true">
+								</p:selectBooleanButton>
+
+								<h:outputText value="Nombre de place Disponible :" />
+								<h:outputText value="#{trajetBean.trajet.placeDisponible}" />
+								
+
+								<f:facet name="footer" style="margin:5px">
+									<p:commandButton id="effectuerReservation" value="Réserver"
+										rendered="#{userConnexionBean.user.login != trajetBean.trajet.chauffeur.login}" action="#{trajetBean.reserverTrajet(trajetBean.trajet)}" />
+									<p:commandButton id="annulerReservation" value="Annuler"
+										rendered="#{userConnexionBean.user.login == trajetBean.trajet.chauffeur.login}" action="#{trajetBean.annulerTrajet(trajetBean.trajet)}"/>
+								</f:facet>
+
+							</h:panelGrid>
+						</b:row>
+
+						<b:row />
+						<b:row class="miniContaint1" id="infoGeneralesUser">
+							<h:panelGrid columns="2" style="text-align:left;width:100%">
+								<h:outputText value="chauffeur :" />
+								<h:outputText value="#{trajetBean.trajet.chauffeur.login}" />
+
+								<h:outputText value="nb étoiles" class="fa fa-home" />
+								<h:outputText value="avis" />
+
+								<h:outputText value="type env" class="fa fa-home" />
+								<p:dataList	value="#{trajetBean.trajet.chauffeur.environnements}" />
+
+								<h:outputText value="dernière connexion" />
+								<h:outputText
+									value="#{trajetBean.trajet.chauffeur.dateDerniereConnexion}">
+									<f:convertDateTime pattern="dd:MM/yy HH:mm"/>
+									</h:outputText>
+								<h:outputText value="date d'inscription" />
+								<h:outputText
+									value="#{trajetBean.trajet.chauffeur.dateInscription}">
+									<f:convertDateTime pattern="dd:MM/yy HH:mm"/>
+									</h:outputText>
+							</h:panelGrid>
+						</b:row>
+
+					</b:column>
+
+				</b:row>
+			</h:form>
+		</ui:define>
+
+
+	</ui:decorate>
+
+</h:body>
+</html>
+

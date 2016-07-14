@@ -1,0 +1,41 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:form>
+		<!-- menu  -->
+		<p:menu toggleable="true">
+			<p:submenu label="Mon Compte">
+				<p:menuitem value="Mot de passe"
+					action="#{navigationBean.fwChangerMDPClient}" icon="ui-icon-disk" />
+				<p:menuitem value="Mise à jour"
+					action="#{navigationBean.fwModifierCompteClient}"
+					icon="ui-icon-arrowrefresh-1-w" />
+				<p:menuitem value="Gérer mes Voitures"
+					action="#{navigationBean.fwGererVoitureClient}"
+					icon="fa fa-car fa-fw" />
+			</p:submenu>
+			<p:submenu label="Trajets">
+				<p:menuitem value="Trajets à venir" action="#{navigationBean.fwAccueilClient}"
+					icon="ui-icon-close" />
+				<p:menuitem value="Mes réservations" action="#{navigationBean.fwMesReservations}"
+					icon="ui-icon-close" />
+				<p:menuitem value="Mes sollicitations" action="#{navigationBean.fwAccueilClient}"
+					icon="ui-icon-close" />
+				<p:menuitem value="Proposer un trajet"
+					action="#{navigationBean.fwProposerTrajetClient}" icon="fa fa-home" />
+				<p:menuitem value="Réserver un trajet" action="#{navigationBean.fwTopDestination}"
+					icon="ui-icon-close" />
+			</p:submenu>
+			<p:submenu label="Others">
+				<p:menuitem value="Primeface" url="http://www.primefaces.org"
+					icon="ui-icon-home" />
+			</p:submenu>
+		</p:menu>
+
+	</h:form>
+
+</ui:composition>

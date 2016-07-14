@@ -1,0 +1,57 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui" xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title><ui:insert name="title">ShareMyCar</ui:insert></title>
+	<h:outputStylesheet name="css/stylesheet.css" />
+	<f:loadBundle basename="com.sharemycar.bean.bundle.messages" var="msg"/>
+</h:head>
+
+<h:body>
+
+	<!-- col-xs - mobie -->
+	<!-- col-sm - tablette -->
+	<!-- col-md - pc -->
+
+	<b:container fluid="true" id="principal">
+
+		<b:column col-xs="12" col-sm="12" col-md="12" id="header">
+			<ui:insert name="header">
+				<ui:include src="#{templatesNavigationBean.header}" />
+			</ui:insert>
+		</b:column>
+
+		<b:column col-xs="12" col-sm="12" col-md="12" id="recherche">
+			<ui:insert name="recherche">
+				<ui:include src="#{templatesNavigationBean.recherche}" />
+			</ui:insert>
+		</b:column>
+
+
+		<b:column col-xs="12" col-sm="12" col-md="12" id="messages">
+			<ui:insert name="messages">
+				<ui:include src="#{templatesNavigationBean.messages}" />
+			</ui:insert>
+		</b:column>
+
+		<b:column col-xs="12" col-sm="12" col-md="12" id="content">
+			<ui:insert name="content">
+				<ui:include src="#{templatesNavigationBean.content}" />
+			</ui:insert>
+		</b:column>
+
+		<b:row>
+			<b:column col-xs="12" col-sm="12" col-md="12" id="footer">
+				<ui:insert name="footer">
+					<ui:include src="#{templatesNavigationBean.footer}" />
+				</ui:insert>
+			</b:column>
+		</b:row>
+
+	</b:container>
+
+</h:body>
+
+</html>

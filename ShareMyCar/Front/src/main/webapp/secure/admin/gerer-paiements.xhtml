@@ -1,0 +1,225 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<h:head>
+	<title>Gestion des Trajets</title>
+</h:head>
+<h:body>
+	<ui:decorate template="#{templatesNavigationBean.navLeftTemplate}">
+
+		<ui:define name="navLeft">
+			<ui:include src="#{templatesNavigationBean.menuAdmin}"></ui:include>
+		</ui:define>
+
+		<ui:define name="content">
+
+			<!--  affiche le bouton pour afficher la fenetre de saisie de l'utilisateur à créer -->
+       	<h:form id="AddTrajetButton">
+				<p:commandButton value="Ajouter un Trajet"
+					action="#{navigationBean.goPublierTrajetAdmin}" />
+			</h:form>
+
+			<h:form id="tableau">
+				<p:dataTable var="trajet" value="#{trajetBean.listTrajets}"
+					id="trajetsTable" widgetVar="trajetsTable"
+					emptyMessage="Aucun Trajet trouvé dans la table" paginator="true"
+					rows="10"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="10,20,50" style="width:100%;font-size:10px">
+
+					<p:column id="trajetId" headerText="ID" resizable="true"
+						style="width:7%">
+						<h:outputText value="#{trajet.id}" />
+					</p:column>
+
+					<p:column id="trajetVilleDepart" headerText="Ville de départ"
+						resizable="true">
+						<h:outputText value="#{trajet.villeDepart.nomVille}" />
+					</p:column>
+
+					<p:column id="trajetDateDepart" headerText="Date de départ"
+						resizable="true" >
+						<h:outputText value="#{trajet.dateDepart}">
+							<f:convertDateTime pattern="dd/MM/yy HH:mm" />
+						</h:outputText>
+					</p:column>
+
+					<p:column id="trajetVilleArrive" headerText="Ville d'arrivé"
+						resizable="true">
+						<h:outputText value="#{trajet.villeArrive.nomVille}" />
+					</p:column>
+
+					<p:column id="trajetChauffeur" headerText="Chauffeur"
+						resizable="true">
+						<h:outputText value="#{trajet.chauffeur.login}" />
+					</p:column>
+
+					<p:column id="trajetDatePublication"
+						headerText="Date de publication" resizable="true">
+						<h:outputText value="#{trajet.datePublication}" />
+					</p:column>
+
+					<!-- ajout des options de modification et suppression en bout de ligne du tableau -->
+					<p:column>
+						<p:commandButton id="edit" update=":update:updateTrajetDialog"
+							icon="ui-icon-arrowrefresh-1-w"
+							oncomplete="PF('updateTrajetWidget').show();"
+							actionListener="#{trajetBean.editEvent(trajet)}" title="Editer" />
+						<p:commandButton id="affiche" value="Voir"
+							action="#{trajetBean.consulterTrajet(trajet)}" title="Voir" />
+						<p:commandButton id="delete" update=":delete:deleteTrajetDialog"
+							icon="ui-icon-trash"
+							actionListener="#{trajetBean.editEvent(trajet)}"
+							oncomplete="PF('deleteTrajetWidget').show();" title="Supprimer" />
+					</p:column>
+
+				</p:dataTable>
+			</h:form>
+
+			<!-- frame pour la modification du trajet -->
+			<h:form id="update">
+				<p:dialog header="Modification" widgetVar="updateTrajetWidget"
+					resizable="false" id="updateTrajetDialog" modal="true">
+
+					<h:panelGrid id="updateTrajetGrid" columns="2" cellpadding="4"
+						style="margin:0 auto;">
+						<f:facet name="header">
+							<h:outputLabel value="Modification d'un Trajet" />
+						</f:facet>
+
+						<h:outputText value="Pour le client (login) :"
+							for="autoCompleteClient" />
+						<p:autoComplete id="autoCompleteClient"
+							value="#{trajetBean.trajet.chauffeur}"
+							completeMethod="#{autoCompleteClientBean.completeClient}"
+							var="client" itemLabel="#{client.login}" itemValue="#{client}"
+							converter="clientConverter" forceSelection="true" required="true"
+							requiredMessage="Aucun client renseigné" />
+						<p:separator />
+						<p:separator />
+
+						<h:outputText value="Ville de départ :"
+							for="autoCompleteVilleDepart" />
+						<p:autoComplete id="AutoCompleteVilleDepart"
+							value="#{trajetBean.trajet.villeDepart}"
+							completeMethod="#{autoCompleteVilleBean.completeVille}"
+							var="ville" itemLabel="#{ville.nomVille}" itemValue="#{ville}"
+							converter="villeConverter" forceSelection="true" required="true"
+							requiredMessage="Aucune ville de départ renseigné" />
+
+						<h:outputText value="Ville d'arrivé :"
+							for="autoCompleteVilleArrive" />
+						<p:autoComplete id="autoCompleteVilleArrive"
+							value="#{trajetBean.trajet.villeArrive}"
+							completeMethod="#{autoCompleteVilleBean.completeVille}"
+							var="ville" itemLabel="#{ville.nomVille}" itemValue="#{ville}"
+							converter="villeConverter" forceSelection="true" required="true"
+							requiredMessage="Aucune ville d'arrivé renseigné" />
+
+						<h:outputText value="Jour du départ :" />
+						<p:calendar mode="popup" mindate="#{now}" pattern="dd/MM/yyyy"
+							pages="3" value="#{trajetBean.dateDepart}" required="true"
+							requiredMessage="Il faut indiqué une date pour le départ"
+							timeZone="Africa/Dakar" />
+
+						<h:outputText value="Heure du départ :" />
+						<p:calendar mode="popup" pattern="HH:mm" timeOnly="true"
+							value="#{trajetBean.heureDepart}" required="true"
+							requiredMessage="Il faut indiqué une heure pour le départ"
+							timeZone="Africa/Dakar" />
+
+						<h:outputText value="Commentaire :" />
+						<p:inputTextarea row="5" counter="display" maxlength="255"
+							cols="30" counterTemplate="{0} caractères restants."
+							autoResize="false"
+							value="#{trajetBean.trajet.infoComplementaire}" />
+						<p:column></p:column>
+						<h:outputText id="display" />
+
+						<p:separator />
+						<p:separator />
+
+						<h:outputText value="Prix :" />
+						<pe:inputNumber id="prixTrajet" value="#{trajetBean.trajet.prix}"
+							symbol=" XOF" symbolPosition="s" decimalSeparator=","
+							required="true"
+							requiredMessage="Il faut indiquer le prix souhaité">
+							<p:ajax event="blur" update="prixTrajet" />
+						</pe:inputNumber>
+
+						<h:outputText value="Mode d'acceptation :" />
+						<p:selectBooleanButton id="acception"
+							value="#{trajetBean.trajet.autoSoumission}" onLabel="Automatique"
+							offLabel="Manuelle" onIcon="ui-icon-check"
+							offIcon="ui-icon-close" required="true">
+						</p:selectBooleanButton>
+
+						<h:outputText value="Annuler :" />
+						<p:selectBooleanButton id="annuler"
+							value="#{trajetBean.trajet.annuler}" onLabel="oui" offLabel="Non"
+							onIcon="ui-icon-check" offIcon="ui-icon-close" required="true">
+						</p:selectBooleanButton>
+
+						<h:outputText value="Place(s) Disponible(s) :" />
+						<p:inputText value="#{trajetBean.trajet.placeDisponible}"
+							converter="javax.faces.Integer" required="true"
+							requiredMessage="Nous ne pourrions pas savoir combien de fois proposer le trajet si le nombre de place n'est pas précisé" />
+
+
+
+					</h:panelGrid>
+					<p:separator />
+					<p:commandButton value="Enregistrer" update=":tableau:trajetsTable"
+						actionListener="#{trajetBean.update}"
+						oncomplete="PF('updateTrajetWidget').hide()" />
+				</p:dialog>
+			</h:form>
+
+			<!-- confirmation de suppression du trajet -->
+			<h:form id="delete">
+				<p:dialog header="Confirmation de la suppression"
+					widgetVar="deleteTrajetWidget" resizable="false"
+					id="deleteTrajetDialog" modal="true">
+
+					<h:panelGrid id="deleteTrajetGrid" columns="2" cellpadding="4"
+						style="margin:0 auto;">
+
+						<f:facet name="header">
+							<h:outputLabel
+								value="Confirmer la suppression de : #{trajetBean.trajet.id}" />
+						</f:facet>
+
+						<h:outputLabel value="Chauffeur :" />
+						<h:outputLabel value="#{trajetBean.trajet.chauffeur.login}" />
+
+						<h:outputLabel value="Au départ :" />
+						<h:outputLabel value="#{trajetBean.trajet.villeDepart.nomVille}" />
+
+						<h:outputLabel value="le :" />
+						<h:outputLabel value="#{trajetBean.trajet.dateDepart}">
+							<f:convertDateTime pattern="dd/MM/yy HH:mm" />
+						</h:outputLabel>
+
+						<h:outputLabel value="Arrivé à :" />
+						<h:outputLabel value="#{trajetBean.trajet.villeArrive.nomVille}" />
+
+
+					</h:panelGrid>
+					<p:separator />
+					<p:commandButton value="Confirmer" update=":tableau:trajetsTable"
+						actionListener="#{trajetBean.delete}"
+						oncomplete="PF('deleteTrajetWidget').hide()" />
+				</p:dialog>
+			</h:form>
+
+		</ui:define>
+
+	</ui:decorate>
+
+</h:body>
+</html>
+

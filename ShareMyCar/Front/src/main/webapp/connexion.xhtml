@@ -1,0 +1,51 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+
+<h:head>
+	<title>Connexion au service</title>
+</h:head>
+<h:body>
+	<ui:decorate template="#{templatesNavigationBean.basicTemplate}">
+
+		<ui:define name="content">
+			<h:form id="formulaireConnexion">
+				<b:container>
+					<h3>Connexion</h3>
+					<p:separator />
+					<p:focus context="formulaireConnexion" />
+					<h:panelGrid columns="2" title="formulaire de connexion"
+						cellspacing="20" cellpadding="25">
+
+						<h:outputText value="Login" />
+						<p:inputText value="#{userConnexionBean.login}" required="true"
+							requiredMessage="Il faut saisir un pseudo" size="25" />
+
+						<h:outputText value="Mot de passe" />
+						<p:password id="pwd1" value="#{userConnexionBean.password}"
+							required="true" size="25"
+							requiredMessage="Aucun mot de passe ne semble avoir été saisie" />
+
+						<f:facet name="footer">
+							<h:panelGroup>
+								<p:commandButton value="Valider"
+									action="#{userConnexionBean.doConnexion}"/>
+								<p:commandButton value="Réinitialiser"
+									update="formulaireConnexion" process="@this">
+									<p:resetInput target="formulaireConnexion" />
+								</p:commandButton>
+								
+								<p:commandButton value="Annuler"
+									action="#{navigationBean.fwIndex}"></p:commandButton>
+							</h:panelGroup>
+						</f:facet>
+					</h:panelGrid>
+					<p:separator />
+				</b:container>
+			</h:form>
+		</ui:define>
+	</ui:decorate>
+</h:body>
+</html>
