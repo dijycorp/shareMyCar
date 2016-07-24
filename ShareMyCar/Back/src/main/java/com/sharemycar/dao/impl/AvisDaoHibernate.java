@@ -7,9 +7,9 @@ import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 import com.sharemycar.dao.AvisDao;
-import com.sharemycar.entity.Avis;
-import com.sharemycar.entity.Client;
-import com.sharemycar.entity.Reservation;
+import com.sharemycar.entities.Avis;
+import com.sharemycar.entities.Client;
+import com.sharemycar.entities.Reservation;
 
 @Transactional
 @Repository("avisDaoHibernate")

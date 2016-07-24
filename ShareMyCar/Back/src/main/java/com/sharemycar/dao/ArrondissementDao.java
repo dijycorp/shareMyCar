@@ -1,8 +1,9 @@
 package com.sharemycar.dao;
 
 import java.util.List;
-import com.sharemycar.entity.Arrondissement;
-import com.sharemycar.entity.Ville;
+
+import com.sharemycar.entities.Arrondissement;
+import com.sharemycar.entities.Ville;
 
 public interface ArrondissementDao {
 

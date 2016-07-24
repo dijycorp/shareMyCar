@@ -7,7 +7,7 @@ import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 import com.sharemycar.dao.VilleDao;
-import com.sharemycar.entity.Ville;
+import com.sharemycar.entities.Ville;
 
 @Transactional
 @Repository("villeDaoHibernate")

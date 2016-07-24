@@ -2,11 +2,11 @@ package com.sharemycar.dao.test.link;
 
 import org.apache.log4j.Logger;
 
-import com.sharemycar.entity.Arrondissement;
-import com.sharemycar.entity.Departement;
-import com.sharemycar.entity.Pays;
-import com.sharemycar.entity.Region;
-import com.sharemycar.entity.Ville;
+import com.sharemycar.entities.Arrondissement;
+import com.sharemycar.entities.Departement;
+import com.sharemycar.entities.Pays;
+import com.sharemycar.entities.Region;
+import com.sharemycar.entities.Ville;
 import com.sharemycar.facade.FacadeFactory;
 
 public class LinkLieuxTestJavax {

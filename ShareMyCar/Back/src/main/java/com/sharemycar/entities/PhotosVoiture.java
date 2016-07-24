@@ -1,4 +1,4 @@
-package com.sharemycar.entity;
+package com.sharemycar.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

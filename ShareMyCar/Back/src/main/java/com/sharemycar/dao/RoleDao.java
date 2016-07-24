@@ -2,7 +2,7 @@ package com.sharemycar.dao;
 
 import java.util.List;
 
-import com.sharemycar.entity.Role;
+import com.sharemycar.entities.Role;
 
 public interface RoleDao {
 

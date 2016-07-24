@@ -2,7 +2,7 @@ package com.sharemycar.service;
 
 import java.util.List;
 
-import com.sharemycar.entity.Message;
+import com.sharemycar.entities.Message;
 
 public interface MessageService {
 

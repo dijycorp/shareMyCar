@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sharemycar.dao.PaiementDao;
-import com.sharemycar.entity.Paiement;
+import com.sharemycar.entities.Paiement;
 import com.sharemycar.service.PaiementService;
 
 @Service

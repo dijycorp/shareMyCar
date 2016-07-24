@@ -11,8 +11,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import com.sharemycar.bean.nav.NavigationBean;
-import com.sharemycar.entity.Admin;
-import com.sharemycar.entity.Role;
+import com.sharemycar.entities.Admin;
+import com.sharemycar.entities.Role;
 import com.sharemycar.facade.FacadeFactory;
 import com.sharemycar.service.UserAdminService;
 

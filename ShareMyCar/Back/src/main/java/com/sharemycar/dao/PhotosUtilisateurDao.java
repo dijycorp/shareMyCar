@@ -1,7 +1,8 @@
 package com.sharemycar.dao;
 
 import java.util.List;
-import com.sharemycar.entity.PhotosUtilisateur;
+
+import com.sharemycar.entities.PhotosUtilisateur;
 
 public interface PhotosUtilisateurDao {
 

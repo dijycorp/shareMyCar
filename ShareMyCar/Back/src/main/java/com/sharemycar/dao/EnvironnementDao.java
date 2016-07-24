@@ -2,7 +2,7 @@ package com.sharemycar.dao;
 
 import java.util.List;
 
-import com.sharemycar.entity.Environnement;
+import com.sharemycar.entities.Environnement;
 
 public interface EnvironnementDao {
 

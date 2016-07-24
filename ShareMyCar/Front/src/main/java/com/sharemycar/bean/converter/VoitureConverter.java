@@ -7,7 +7,7 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
 
-import com.sharemycar.entity.Voiture;
+import com.sharemycar.entities.Voiture;
 import com.sharemycar.facade.FacadeFactory;
 import com.sharemycar.service.VoitureService;
 

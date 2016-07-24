@@ -7,11 +7,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sharemycar.dao.ReservationDao;
-import com.sharemycar.entity.Avis;
-import com.sharemycar.entity.Client;
-import com.sharemycar.entity.Paiement;
-import com.sharemycar.entity.Reservation;
-import com.sharemycar.entity.Trajet;
+import com.sharemycar.entities.Avis;
+import com.sharemycar.entities.Client;
+import com.sharemycar.entities.Paiement;
+import com.sharemycar.entities.Reservation;
+import com.sharemycar.entities.Trajet;
 import com.sharemycar.service.ReservationService;
 
 @Service

@@ -13,8 +13,8 @@ import javax.faces.event.ActionEvent;
 import javax.persistence.ElementCollection;
 
 import com.sharemycar.bean.nav.NavigationBean;
-import com.sharemycar.entity.Client;
-import com.sharemycar.entity.Role;
+import com.sharemycar.entities.Client;
+import com.sharemycar.entities.Role;
 import com.sharemycar.facade.FacadeFactory;
 import com.sharemycar.service.UserClientService;
 

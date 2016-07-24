@@ -2,9 +2,9 @@ package com.sharemycar.service;
 
 import java.util.List;
 
-import com.sharemycar.entity.PhotosUtilisateur;
-import com.sharemycar.entity.Role;
-import com.sharemycar.entity.User;
+import com.sharemycar.entities.PhotosUtilisateur;
+import com.sharemycar.entities.Role;
+import com.sharemycar.entities.User;
 
 public interface UserService {
 	

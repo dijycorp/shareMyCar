@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sharemycar.dao.MessageDao;
-import com.sharemycar.entity.Message;
+import com.sharemycar.entities.Message;
 
 @Transactional // cr�e automatiquement le transcation begin, close, ect...
 @Repository // d�clare la class comme �tant une entity d'une base de

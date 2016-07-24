@@ -9,7 +9,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
-import com.sharemycar.entity.Environnement;
+import com.sharemycar.entities.Environnement;
 import com.sharemycar.facade.FacadeFactory;
 
 

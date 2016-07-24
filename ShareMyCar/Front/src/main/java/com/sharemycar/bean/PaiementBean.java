@@ -5,8 +5,8 @@ import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-import com.sharemycar.entity.Paiement;
-import com.sharemycar.entity.Reservation;
+import com.sharemycar.entities.Paiement;
+import com.sharemycar.entities.Reservation;
 
 @ManagedBean(name = "paiementBean")
 @SessionScoped

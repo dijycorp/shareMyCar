@@ -11,8 +11,8 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
 import com.sharemycar.bean.nav.NavigationBean;
-import com.sharemycar.entity.Trajet;
-import com.sharemycar.entity.Ville;
+import com.sharemycar.entities.Trajet;
+import com.sharemycar.entities.Ville;
 import com.sharemycar.facade.FacadeFactory;
 import com.sharemycar.service.TrajetService;
 

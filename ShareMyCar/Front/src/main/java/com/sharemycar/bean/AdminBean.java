@@ -9,7 +9,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import com.sharemycar.bean.nav.NavigationBean;
-import com.sharemycar.entity.Admin;
+import com.sharemycar.entities.Admin;
 import com.sharemycar.facade.FacadeFactory;
 import com.sharemycar.service.UserAdminService;
 

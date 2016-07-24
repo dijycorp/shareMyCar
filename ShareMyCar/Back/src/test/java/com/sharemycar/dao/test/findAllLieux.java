@@ -4,8 +4,8 @@ package com.sharemycar.dao.test;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.sharemycar.entity.User;
-import com.sharemycar.entity.Ville;
+import com.sharemycar.entities.User;
+import com.sharemycar.entities.Ville;
 import com.sharemycar.facade.FacadeFactory;
 import com.sharemycar.service.UserService;
 import com.sharemycar.service.VilleService;

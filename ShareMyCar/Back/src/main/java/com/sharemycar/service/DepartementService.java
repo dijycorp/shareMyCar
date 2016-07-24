@@ -2,8 +2,8 @@ package com.sharemycar.service;
 
 import java.util.List;
 
-import com.sharemycar.entity.Arrondissement;
-import com.sharemycar.entity.Departement;
+import com.sharemycar.entities.Arrondissement;
+import com.sharemycar.entities.Departement;
 
 public interface DepartementService {
 

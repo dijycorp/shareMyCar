@@ -13,11 +13,11 @@ import com.sharemycar.dao.DepartementDao;
 import com.sharemycar.dao.PaysDao;
 import com.sharemycar.dao.RegionDao;
 import com.sharemycar.dao.VilleDao;
-import com.sharemycar.entity.Arrondissement;
-import com.sharemycar.entity.Departement;
-import com.sharemycar.entity.Pays;
-import com.sharemycar.entity.Region;
-import com.sharemycar.entity.Ville;
+import com.sharemycar.entities.Arrondissement;
+import com.sharemycar.entities.Departement;
+import com.sharemycar.entities.Pays;
+import com.sharemycar.entities.Region;
+import com.sharemycar.entities.Ville;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:META-INF/dev-context.xml")

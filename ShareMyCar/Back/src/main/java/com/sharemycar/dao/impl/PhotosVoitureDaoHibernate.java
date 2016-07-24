@@ -8,7 +8,7 @@ import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import com.sharemycar.dao.PhotosVoitureDao;
-import com.sharemycar.entity.PhotosVoiture;
+import com.sharemycar.entities.PhotosVoiture;
 
 @Transactional
 @Repository

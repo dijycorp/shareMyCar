@@ -10,8 +10,8 @@ import com.sharemycar.dao.EnvironnementDao;
 import com.sharemycar.dao.PhotosUtilisateurDao;
 import com.sharemycar.dao.RoleDao;
 import com.sharemycar.dao.UserDao;
-import com.sharemycar.entity.Client;
-import com.sharemycar.entity.Role;
+import com.sharemycar.entities.Client;
+import com.sharemycar.entities.Role;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:META-INF/dev-context.xml")

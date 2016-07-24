@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sharemycar.dao.RegionDao;
-import com.sharemycar.entity.Departement;
-import com.sharemycar.entity.Region;
+import com.sharemycar.entities.Departement;
+import com.sharemycar.entities.Region;
 import com.sharemycar.service.RegionService;
 
 @Service

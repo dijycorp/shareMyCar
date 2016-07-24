@@ -1,8 +1,9 @@
 package com.sharemycar.dao;
 
 import java.util.List;
-import com.sharemycar.entity.Pays;
-import com.sharemycar.entity.Region;
+
+import com.sharemycar.entities.Pays;
+import com.sharemycar.entities.Region;
 
 public interface PaysDao {
 

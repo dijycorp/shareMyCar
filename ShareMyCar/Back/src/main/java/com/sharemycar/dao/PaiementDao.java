@@ -2,7 +2,7 @@ package com.sharemycar.dao;
 
 import java.util.List;
 
-import com.sharemycar.entity.Paiement;
+import com.sharemycar.entities.Paiement;
 
 public interface PaiementDao {
 

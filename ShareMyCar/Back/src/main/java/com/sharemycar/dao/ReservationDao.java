@@ -2,11 +2,11 @@ package com.sharemycar.dao;
 
 import java.util.List;
 
-import com.sharemycar.entity.Avis;
-import com.sharemycar.entity.Client;
-import com.sharemycar.entity.Paiement;
-import com.sharemycar.entity.Reservation;
-import com.sharemycar.entity.Trajet;
+import com.sharemycar.entities.Avis;
+import com.sharemycar.entities.Client;
+import com.sharemycar.entities.Paiement;
+import com.sharemycar.entities.Reservation;
+import com.sharemycar.entities.Trajet;
 
 public interface ReservationDao {
 

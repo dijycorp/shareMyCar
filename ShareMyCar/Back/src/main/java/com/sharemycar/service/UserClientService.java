@@ -2,9 +2,9 @@ package com.sharemycar.service;
 
 import java.util.List;
 
-import com.sharemycar.entity.Client;
-import com.sharemycar.entity.Environnement;
-import com.sharemycar.entity.Voiture;
+import com.sharemycar.entities.Client;
+import com.sharemycar.entities.Environnement;
+import com.sharemycar.entities.Voiture;
 
 public interface UserClientService {
 	

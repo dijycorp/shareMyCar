@@ -2,9 +2,9 @@ package com.sharemycar.service;
 
 import java.util.List;
 
-import com.sharemycar.entity.Admin;
-import com.sharemycar.entity.Client;
-import com.sharemycar.entity.User;
+import com.sharemycar.entities.Admin;
+import com.sharemycar.entities.Client;
+import com.sharemycar.entities.User;
 
 public interface UserAdminService {
 	

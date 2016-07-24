@@ -1,7 +1,8 @@
 package com.sharemycar.dao.dataset;
 
 import org.apache.log4j.Logger;
-import com.sharemycar.entity.Role;
+
+import com.sharemycar.entities.Role;
 import com.sharemycar.facade.FacadeFactory;
 
 public class RoleInsert {

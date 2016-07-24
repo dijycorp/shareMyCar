@@ -11,11 +11,11 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import com.sharemycar.bean.nav.NavigationBean;
-import com.sharemycar.entity.Client;
-import com.sharemycar.entity.Environnement;
-import com.sharemycar.entity.Reservation;
-import com.sharemycar.entity.Trajet;
-import com.sharemycar.entity.Voiture;
+import com.sharemycar.entities.Client;
+import com.sharemycar.entities.Environnement;
+import com.sharemycar.entities.Reservation;
+import com.sharemycar.entities.Trajet;
+import com.sharemycar.entities.Voiture;
 import com.sharemycar.facade.FacadeFactory;
 import com.sharemycar.service.UserClientService;
 

@@ -15,9 +15,9 @@ import org.primefaces.event.FlowEvent;
 
 import com.sharemycar.bean.nav.NavigationBean;
 import com.sharemycar.bean.tools.DateToolsBean;
-import com.sharemycar.entity.Client;
-import com.sharemycar.entity.Reservation;
-import com.sharemycar.entity.Trajet;
+import com.sharemycar.entities.Client;
+import com.sharemycar.entities.Reservation;
+import com.sharemycar.entities.Trajet;
 import com.sharemycar.facade.FacadeFactory;
 import com.sharemycar.service.ReservationService;
 import com.sharemycar.service.TrajetService;

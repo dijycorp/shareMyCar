@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sharemycar.dao.VilleDao;
-import com.sharemycar.entity.Ville;
+import com.sharemycar.entities.Ville;
 import com.sharemycar.service.VilleService;
 
 @Service

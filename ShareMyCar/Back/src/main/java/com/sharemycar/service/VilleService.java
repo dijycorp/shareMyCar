@@ -2,7 +2,7 @@ package com.sharemycar.service;
 
 import java.util.List;
 
-import com.sharemycar.entity.Ville;
+import com.sharemycar.entities.Ville;
 
 public interface VilleService {
 

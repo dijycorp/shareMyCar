@@ -2,8 +2,8 @@ package com.sharemycar.service;
 
 import java.util.List;
 
-import com.sharemycar.entity.Departement;
-import com.sharemycar.entity.Region;
+import com.sharemycar.entities.Departement;
+import com.sharemycar.entities.Region;
 
 public interface RegionService {
 

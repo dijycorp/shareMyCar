@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sharemycar.dao.RoleDao;
-import com.sharemycar.entity.Role;
+import com.sharemycar.entities.Role;
 
 @Transactional
 @Repository

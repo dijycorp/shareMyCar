@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sharemycar.dao.RoleDao;
-import com.sharemycar.entity.Role;
+import com.sharemycar.entities.Role;
 import com.sharemycar.service.RoleService;
 
 @Service

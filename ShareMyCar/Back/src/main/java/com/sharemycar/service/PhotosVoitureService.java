@@ -1,7 +1,8 @@
 package com.sharemycar.service;
 
 import java.util.List;
-import com.sharemycar.entity.PhotosVoiture;
+
+import com.sharemycar.entities.PhotosVoiture;
 
 public interface PhotosVoitureService {
 

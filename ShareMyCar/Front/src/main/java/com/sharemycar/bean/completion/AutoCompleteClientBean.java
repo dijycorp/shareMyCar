@@ -11,7 +11,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import com.sharemycar.bean.nav.NavigationBean;
-import com.sharemycar.entity.Client;
+import com.sharemycar.entities.Client;
 import com.sharemycar.facade.FacadeFactory;
 import com.sharemycar.service.UserClientService;
 

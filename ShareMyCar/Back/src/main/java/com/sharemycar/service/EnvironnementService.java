@@ -2,7 +2,7 @@ package com.sharemycar.service;
 
 import java.util.List;
 
-import com.sharemycar.entity.Environnement;
+import com.sharemycar.entities.Environnement;
 
 public interface EnvironnementService {
 

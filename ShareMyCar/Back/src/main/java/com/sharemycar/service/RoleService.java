@@ -2,7 +2,7 @@ package com.sharemycar.service;
 
 import java.util.List;
 
-import com.sharemycar.entity.Role;
+import com.sharemycar.entities.Role;
 
 public interface RoleService {
 

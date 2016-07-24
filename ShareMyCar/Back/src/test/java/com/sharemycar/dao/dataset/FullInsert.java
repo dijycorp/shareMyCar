@@ -4,22 +4,22 @@ import java.util.Date;
 
 import org.apache.log4j.Logger;
 
-import com.sharemycar.entity.Admin;
-import com.sharemycar.entity.Arrondissement;
-import com.sharemycar.entity.Avis;
-import com.sharemycar.entity.Client;
-import com.sharemycar.entity.Departement;
-import com.sharemycar.entity.Environnement;
-import com.sharemycar.entity.Paiement;
-import com.sharemycar.entity.Pays;
-import com.sharemycar.entity.PhotosUtilisateur;
-import com.sharemycar.entity.PhotosVoiture;
-import com.sharemycar.entity.Region;
-import com.sharemycar.entity.Reservation;
-import com.sharemycar.entity.Role;
-import com.sharemycar.entity.Trajet;
-import com.sharemycar.entity.Ville;
-import com.sharemycar.entity.Voiture;
+import com.sharemycar.entities.Admin;
+import com.sharemycar.entities.Arrondissement;
+import com.sharemycar.entities.Avis;
+import com.sharemycar.entities.Client;
+import com.sharemycar.entities.Departement;
+import com.sharemycar.entities.Environnement;
+import com.sharemycar.entities.Paiement;
+import com.sharemycar.entities.Pays;
+import com.sharemycar.entities.PhotosUtilisateur;
+import com.sharemycar.entities.PhotosVoiture;
+import com.sharemycar.entities.Region;
+import com.sharemycar.entities.Reservation;
+import com.sharemycar.entities.Role;
+import com.sharemycar.entities.Trajet;
+import com.sharemycar.entities.Ville;
+import com.sharemycar.entities.Voiture;
 import com.sharemycar.facade.FacadeFactory;
 
 public class FullInsert {

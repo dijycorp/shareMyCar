@@ -2,13 +2,13 @@ package com.sharemycar.dao;
 
 import java.util.List;
 
-import com.sharemycar.entity.Admin;
-import com.sharemycar.entity.Client;
-import com.sharemycar.entity.Environnement;
-import com.sharemycar.entity.PhotosUtilisateur;
-import com.sharemycar.entity.Role;
-import com.sharemycar.entity.User;
-import com.sharemycar.entity.Voiture;
+import com.sharemycar.entities.Admin;
+import com.sharemycar.entities.Client;
+import com.sharemycar.entities.Environnement;
+import com.sharemycar.entities.PhotosUtilisateur;
+import com.sharemycar.entities.Role;
+import com.sharemycar.entities.User;
+import com.sharemycar.entities.Voiture;
 
 public interface UserDao {
 	

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sharemycar.dao.PhotosUtilisateurDao;
-import com.sharemycar.entity.PhotosUtilisateur;
+import com.sharemycar.entities.PhotosUtilisateur;
 
 @Transactional
 @Repository

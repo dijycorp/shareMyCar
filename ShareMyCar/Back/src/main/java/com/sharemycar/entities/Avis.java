@@ -1,36 +1,37 @@
-package com.sharemycar.entity;
+package com.sharemycar.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.MapsId;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="paiement")
-public class Paiement {
-
+@Table(name="avis")
+public class Avis {
+	
 	@Id
 	@GeneratedValue
 	private Integer id;
-	private String type;
-	private Boolean etat;
+	private Float note;
+	private String commentaire;
 	
-	@OneToOne
-	@JoinColumn(name="id_reservation")
-	@MapsId
+	@ManyToOne
+	private Client client;
+	
+	@ManyToOne
 	private Reservation reservation;
 
-	public Paiement() {
+	public Avis() {
 	}
 
-	public Paiement(String type, Boolean etat) {
+	public Avis(Float note, String commentaire) {
 		super();
-		this.type = type;
-		this.etat = etat;
+		this.note = note;
+		this.commentaire = commentaire;
 	}
+
+
 
 	public Integer getId() {
 		return id;
@@ -40,25 +41,33 @@ public class Paiement {
 		this.id = id;
 	}
 
-	public String getType() {
-		return type;
+	public Float getNote() {
+		return note;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setNote(Float note) {
+		this.note = note;
 	}
 
-	public Boolean getEtat() {
-		return etat;
+	public String getCommentaire() {
+		return commentaire;
 	}
 
-	public void setEtat(Boolean etat) {
-		this.etat = etat;
+	public void setCommentaire(String commentaire) {
+		this.commentaire = commentaire;
 	}
 
 	@Override
 	public String toString() {
-		return "Paiement [id=" + id + ", Type=" + type + ", etat=" + etat + "]";
+		return "Avis [id=" + id + ", note=" + note + ", commentaire=" + commentaire + "]";
+	}
+
+	public Client getClient() {
+		return client;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
 	}
 
 	public Reservation getReservation() {
@@ -86,7 +95,7 @@ public class Paiement {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Paiement other = (Paiement) obj;
+		Avis other = (Avis) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -99,7 +108,7 @@ public class Paiement {
 			return false;
 		return true;
 	}
+
 	
-	
-	
+
 }

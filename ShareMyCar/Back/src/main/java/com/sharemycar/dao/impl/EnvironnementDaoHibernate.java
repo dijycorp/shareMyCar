@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sharemycar.dao.EnvironnementDao;
-import com.sharemycar.entity.Environnement;
+import com.sharemycar.entities.Environnement;
 
 @Transactional // cr�e automatiquement le transcation begin, close, ect...
 @Repository // d�clare la class comme �tant une entity d'une base de

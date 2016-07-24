@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sharemycar.dao.UserDao;
-import com.sharemycar.entity.Admin;
-import com.sharemycar.entity.Client;
-import com.sharemycar.entity.User;
+import com.sharemycar.entities.Admin;
+import com.sharemycar.entities.Client;
+import com.sharemycar.entities.User;
 import com.sharemycar.service.UserAdminService;
 
 @Service
